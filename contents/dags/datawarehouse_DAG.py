@@ -12,7 +12,21 @@ from airflow.operators.dummy import DummyOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.email_operator import EmailOperator
-from airflow.providers.virtualenv.operators.virtualenv import PythonVirtualenvOperator
+# from airflow.providers.virtualenv.operators.virtualenv import PythonVirtualenvOperator
+# from airflow.operators.python_virtualenv_operator  import PythonVirtualenvOperator
+from airflow.operators.python import (
+    ExternalPythonOperator,
+    PythonOperator,
+    PythonVirtualenvOperator,
+    is_venv_installed,
+)
+
+
+
+
+def my_python_function():
+    pass
+
 
 
 default_args = {
@@ -45,26 +59,36 @@ start = DummyOperator(
     dag=dag,
 )
 
-
-
-
-
-# requirements = PythonVirtualenvOperator(
+# requirements = DummyOperator(
 #     task_id='requirements',
-#     # python_callable=my_python_function,
-#     requirements=['pandas'],  # Danh sách các packages cần cài đặt trong môi trường ảo
-#     python_version='3.8',     # Phiên bản Python sẽ sử dụng trong môi trường ảo
 #     dag=dag,
 # )
 
 
 
 
-# crawler = BashOperator(
+requirements = PythonVirtualenvOperator(
+    task_id='requirements',
+    python_callable=my_python_function,
+    requirements=['scrapy'],  # Danh sách các packages cần cài đặt trong môi trường ảo
+    python_version='3.8',     # Phiên bản Python sẽ sử dụng trong môi trường ảo
+    dag=dag,
+)
+
+
+# crawler = DummyOperator(
 #     task_id='crawler',
-#     bash_command="scripts/crawler.sh",
 #     dag=dag,
 # )
+
+
+
+
+crawler = BashOperator(
+    task_id='crawler',
+    bash_command="scripts/crawler.sh",
+    dag=dag,
+)
 
 
 # with TaskGroup(group_id='etl', dag=dag) as etl:
@@ -73,10 +97,10 @@ start = DummyOperator(
 #     [t0, t1]
 
 
-# send_email = DummyOperator(
-#     task_id='send_email',
-#     dag=dag,
-# )
+send_email = DummyOperator(
+    task_id='send_email',
+    dag=dag,
+)
 
 
 # send_email = EmailOperator(
@@ -96,6 +120,8 @@ end = DummyOperator(
 
 
 # Thiết lập thứ tự các task
-start >>   end
+# start >>   end
 # start >>   send_email >> end
+# start >> requirements>>  send_email >> end
+start >> requirements>>crawler >> send_email >> end
 # start >>requirements>> crawler >> send_email >> end

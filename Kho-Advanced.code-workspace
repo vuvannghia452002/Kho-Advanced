@@ -11,6 +11,9 @@
     },
     {
       "path": "contents/dags"
+    },
+    {
+      "path": "contents/code"
     }
   ],
   "settings": {}

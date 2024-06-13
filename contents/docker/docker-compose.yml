@@ -50,6 +50,7 @@ services:
     volumes:
       - logs:/opt/airflow/logs
       - ../dags:/opt/airflow/dags
+      - ../code:/opt/airflow/code
     environment: *airflow_environment
     command: scheduler
 
