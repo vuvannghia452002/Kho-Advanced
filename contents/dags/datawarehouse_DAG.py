@@ -12,10 +12,6 @@ from airflow.operators.dummy import DummyOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.email_operator import EmailOperator
- 
-
-
- 
 
 
 default_args = {
@@ -49,24 +45,11 @@ start = DummyOperator(
 )
 
 
-
-
-
-
-
-
-
 requirements = BashOperator(
     task_id='requirements',
     bash_command="scripts/requirements.sh",
     dag=dag,
 )
-
-
-
-
- 
-
 
 
 crawler = BashOperator(
@@ -108,4 +91,4 @@ end = DummyOperator(
 # start >>   end
 # start >>   send_email >> end
 # start >> requirements>>  send_email >> end
-start >>requirements>> crawler >> send_email >> end
+start >> requirements >> crawler >> send_email >> end
