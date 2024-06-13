@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "contents"
+    },
+    {
+      "path": "contents/docker"
+    },
+    {
+      "path": "contents/dags"
+    }
+  ],
+  "settings": {}
+}
