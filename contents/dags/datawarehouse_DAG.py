@@ -15,11 +15,7 @@ from airflow.operators.email_operator import EmailOperator
  
 
 
-
-
-def my_python_function():
-    pass
-
+ 
 
 
 default_args = {
