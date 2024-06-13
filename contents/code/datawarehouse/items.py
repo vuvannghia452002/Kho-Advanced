@@ -35,7 +35,7 @@ class TopCVItem(scrapy.Item):
         output_processor=TakeFirst()
     )
 
-    salary = scrapy.Field(
+    salary_range = scrapy.Field(
         input_processor=MapCompose(
             remove_tags,
             remove_newline,

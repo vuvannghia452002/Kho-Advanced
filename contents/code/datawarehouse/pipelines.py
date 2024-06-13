@@ -20,7 +20,7 @@ class TopCVPipeline:
                 job_url VARCHAR(255) NOT NULL,
                 title VARCHAR(255),
                          
-                salary VARCHAR(255),
+                salary_range VARCHAR(255),
                 location VARCHAR(255),
                          
                 description TEXT,
@@ -73,7 +73,7 @@ class TopCVPipeline:
                 job_url, 
                 title,
 
-                salary,
+                salary_range,
                 location,
                 
                 description,
@@ -136,7 +136,7 @@ class TopCVPipeline:
                 adapter.get('job_url', ''),
                 adapter.get('title', ''),
 
-                adapter.get('salary', ''),
+                adapter.get('salary_range', ''),
                 adapter.get('location', ''),
 
                 adapter.get('description', ''),

@@ -65,13 +65,7 @@ requirements = BashOperator(
 
 
 
-
-
-# crawler = DummyOperator(
-#     task_id='crawler',
-#     dag=dag,
-# )
-
+ 
 
 
 
@@ -114,5 +108,4 @@ end = DummyOperator(
 # start >>   end
 # start >>   send_email >> end
 # start >> requirements>>  send_email >> end
-start >> requirements>>crawler >> send_email >> end
-# start >>requirements>> crawler >> send_email >> end
+start >>requirements>> crawler >> send_email >> end

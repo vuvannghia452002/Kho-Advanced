@@ -39,7 +39,7 @@ class TopcvCrawlerSpider(scrapy.Spider):
         loader.add_value("job_url", response.url)
         loader.add_value("title", response.css('title::text').get())
 
-        loader.add_xpath("salary", "//div[@class='job-detail__info--section'][1]")
+        loader.add_xpath("salary_range", "//div[@class='job-detail__info--section'][1]")
         loader.add_xpath("location", "//div[@class='job-detail__info--section'][2]")
 
         loader.add_xpath("description", "//div[@class='job-detail__information-detail--content']/div/div[1]")
