@@ -12,14 +12,7 @@ from airflow.operators.dummy import DummyOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.email_operator import EmailOperator
-# from airflow.providers.virtualenv.operators.virtualenv import PythonVirtualenvOperator
-# from airflow.operators.python_virtualenv_operator  import PythonVirtualenvOperator
-from airflow.operators.python import (
-    ExternalPythonOperator,
-    PythonOperator,
-    PythonVirtualenvOperator,
-    is_venv_installed,
-)
+ 
 
 
 
@@ -59,21 +52,23 @@ start = DummyOperator(
     dag=dag,
 )
 
-# requirements = DummyOperator(
-#     task_id='requirements',
-#     dag=dag,
-# )
 
 
 
 
-requirements = PythonVirtualenvOperator(
+
+
+
+
+requirements = BashOperator(
     task_id='requirements',
-    python_callable=my_python_function,
-    requirements=['scrapy'],  # Danh sách các packages cần cài đặt trong môi trường ảo
-    python_version='3.8',     # Phiên bản Python sẽ sử dụng trong môi trường ảo
+    bash_command="scripts/requirements.sh",
     dag=dag,
 )
+
+
+
+
 
 
 # crawler = DummyOperator(

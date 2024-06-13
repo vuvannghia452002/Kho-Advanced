@@ -1,0 +1,10 @@
+# 
+python-dotenv 
+# Thư viện dùng để kết nối MySQL
+mysql-connector-python
+# Thư viện chính để crawl data là scrapy  
+scrapy
+# Thư viện dùng để tạo thông tin user-agents
+scrapy-user-agents
+# 
+scrapy-rotating-proxies
