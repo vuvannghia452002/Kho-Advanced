@@ -79,20 +79,14 @@ with TaskGroup(group_id='etl', dag=dag) as etl:
     [update_job_salaries_task, update_job_regions_task]
 
 
-send_email = DummyOperator(
+send_email = EmailOperator(
     task_id='send_email',
+    to='lebaoxuan2005@gmail.com',
+    subject='Data Warehouse',
+    html_content="""<h1>Chào bạn,</h1> <p>Đây là thông báo công việc từ Airflow.</p> <a style=" background-color: #04aa6d; color: white; padding: 10px; text-decoration: none; border-radius: 12px; "href="http://localhost:6205/index.php?route=/sql&db=crawler&table=jobs&pos=0" target="_blank"> &#128073; Truy cập MySQL </a> <p> <strong> Vũ Văn Nghĩa </strong> </p> <p> <strong> MSSV: 20206205 </strong> </p>""",
+    mime_charset='utf-8',
     dag=dag,
 )
-
-
-# send_email = EmailOperator(
-#     task_id='send_email',
-#     to='lebaoxuan2005@gmail.com',
-#     subject='Data Warehouse',
-#     html_content="""<h1>Chào bạn,</h1> <p>Đây là thông báo công việc từ Airflow.</p> <a style=" background-color: #04aa6d; color: white; padding: 10px; text-decoration: none; border-radius: 12px; "href="http://localhost:6205/index.php?route=/sql&db=crawler&table=jobs&pos=0" target="_blank"> &#128073; Truy cập MySQL </a> <p> <strong> Vũ Văn Nghĩa </strong> </p> <p> <strong> MSSV: 20206205 </strong> </p>""",
-#     mime_charset='utf-8',
-#     dag=dag,
-# )
 
 
 end = DummyOperator(

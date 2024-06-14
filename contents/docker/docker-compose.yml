@@ -15,9 +15,11 @@ x-environment: &airflow_environment
   - CRAWLER_DATABASE_PASSWORD=nghia
   - CRAWLER_DATABASE_NAME=crawler
 
-
-
-  
+  - AIRFLOW__SMTP__SMTP_HOST=smtp.gmail.com
+  - AIRFLOW__SMTP__SMTP_USER=${AIRFLOW__SMTP__SMTP_USER}
+  - AIRFLOW__SMTP__SMTP_PASSWORD=${AIRFLOW__SMTP__SMTP_PASSWORD}
+  - AIRFLOW__SMTP__SMTP_PORT=587
+  - AIRFLOW__SMTP__SMTP_MAIL_FROM=Airflow
 
 x-airflow-image: &airflow_image apache/airflow:latest
 # ====================================== /AIRFLOW ENVIRONMENT VARIABLES ======================================
@@ -62,8 +64,6 @@ services:
       - ../code:/opt/airflow/code
     environment: *airflow_environment
     command: scheduler
-
-
 
   mysql:
     image: mysql:8.4.0
