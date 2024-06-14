@@ -17,7 +17,7 @@ def parse_salary_range(salary_range):
         return min_salary, max_salary, avg_salary
 
 
-def update_job_salaries():
+def calculate_average_salary():
     conn = mysql.connector.connect(
         host=os.getenv("CRAWLER_DATABASE_HOST"),
         user=os.getenv("CRAWLER_DATABASE_USERNAME"),

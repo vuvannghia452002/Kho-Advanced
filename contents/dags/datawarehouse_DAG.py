@@ -14,8 +14,8 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.email_operator import EmailOperator
 
 
-from update_job_salaries import update_job_salaries
-from update_job_regions import update_job_regions
+from calculate_average_salary import calculate_average_salary
+from get_region import get_region
 
 
 default_args = {
@@ -65,18 +65,18 @@ crawler = BashOperator(
 
 with TaskGroup(group_id='etl', dag=dag) as etl:
 
-    update_job_salaries_task = PythonOperator(
-        task_id='update_job_salaries_task',
-        python_callable=update_job_salaries,
+    calculate_average_salary_task = PythonOperator(
+        task_id='calculate_average_salary_task',
+        python_callable=calculate_average_salary,
         dag=dag,
     )
-    update_job_regions_task = PythonOperator(
-        task_id='update_job_regions_task',
-        python_callable=update_job_regions,
+    get_region_task = PythonOperator(
+        task_id='get_region_task',
+        python_callable=get_region,
         dag=dag,
     )
 
-    [update_job_salaries_task, update_job_regions_task]
+    [calculate_average_salary_task, get_region_task]
 
 
 send_email = EmailOperator(
@@ -96,8 +96,4 @@ end = DummyOperator(
 
 
 # Thiết lập thứ tự các task
-# start >>   end
-# start >>   send_email >> end
-# start >> requirements>>  send_email >> end
-# start >> requirements >> crawler >> send_email >> end
 start >> requirements >> crawler >> etl >> send_email >> end

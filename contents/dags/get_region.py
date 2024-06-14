@@ -41,7 +41,7 @@ def determine_region(location):
     else:
         return 'Khác'
 
-def update_job_regions():
+def get_region():
     conn = mysql.connector.connect(
         host=os.getenv("CRAWLER_DATABASE_HOST"),
         user=os.getenv("CRAWLER_DATABASE_USERNAME"),
