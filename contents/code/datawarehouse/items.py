@@ -128,6 +128,7 @@ class TopCVItem(scrapy.Item):
             remove_tags,
             remove_newline,
             remove_text("Số lượng tuyển, "),
+            remove_text("người"),
         ),
         output_processor=TakeFirst()
     )

@@ -4,7 +4,6 @@ from datawarehouse.spiders.topcv_crawler import TopcvCrawlerSpider
 
 
 def main():
-    print(f"🚀 {"nghia"}")
     settings = get_project_settings()
     process = CrawlerProcess(settings)
     process.crawl(TopcvCrawlerSpider)
