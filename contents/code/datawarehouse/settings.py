@@ -104,11 +104,11 @@ FEED_EXPORT_ENCODING = "utf-8"
 # LOG_LEVEL = 'INFO'
 
 
-# Thêm thông tin rate - limit để fix 429
 # DOWNLOAD_DELAY = 30
 # DOWNLOAD_DELAY = 15
 # DOWNLOAD_DELAY = 5
 # DOWNLOAD_DELAY = 1
+# Thêm thông tin rate - limit để fix 429
 DOWNLOAD_DELAY = 0
 
 

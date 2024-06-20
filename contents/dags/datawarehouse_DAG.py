@@ -42,7 +42,7 @@ dag = DAG(
 )
 
 
-# Định nghĩa các task
+#! Định nghĩa các task
 start = DummyOperator(
     task_id='start',
     dag=dag,
@@ -95,5 +95,5 @@ end = DummyOperator(
 )
 
 
-# Thiết lập thứ tự các task
+#! Thiết lập thứ tự các task
 start >> requirements >> crawler >> etl >> send_email >> end
